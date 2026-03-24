@@ -319,6 +319,61 @@
 <a class="font-inter text-xs tracking-widest uppercase text-zinc-600 hover:text-zinc-100 transition-all" href="#">Abstract</a>
 <a class="font-inter text-xs tracking-widest uppercase text-zinc-600 hover:text-zinc-100 transition-all" href="#">Privacy</a>
 </div>
-</div>
 </footer>
+
+<!-- Tích hợp AI Chatbot -->
+<link rel="stylesheet" href="chatbot.css">
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="chatbot.js"></script>
+
+<!-- Nút mở Chatbot -->
+<button id="chatbot-toggle-btn" aria-label="Mở Chat">
+  <span class="material-symbols-outlined text-3xl">chat_bubble</span>
+</button>
+
+<!-- Widget Chatbot Floating -->
+<div id="smart-chatbot-widget">
+  <!-- Header -->
+  <div class="chatbot-header">
+    <div class="chatbot-header-info">
+      <div class="chatbot-avatar-container">
+        <div class="chatbot-avatar">AI</div>
+        <div class="online-status"></div>
+      </div>
+      <div>
+        <h3 class="chatbot-title">AI Assistant</h3>
+        <p class="chatbot-subtitle">Online</p>
+      </div>
+    </div>
+    <div class="chatbot-controls">
+      <button id="cb-refresh-btn" class="chatbot-btn" title="Làm mới cuộc trò chuyện">
+        <span class="material-symbols-outlined text-sm">refresh</span>
+      </button>
+      <button id="cb-close-btn" class="chatbot-btn" title="Đóng chat">
+        <span class="material-symbols-outlined text-sm">close</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Messages Container -->
+  <div id="cb-messages" class="chatbot-messages">
+    <!-- Typing Indicator (Ẩn mặc định) -->
+    <div id="cb-typing" class="typing-indicator" style="display: none;">
+      <span>Đang nhập</span>
+      <div class="typing-dots-wrapper">
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input Area -->
+  <div class="chatbot-input-container">
+    <input type="text" id="cb-input" class="chatbot-input" placeholder="Bạn muốn hỏi gì..." autocomplete="off">
+    <button id="cb-send-btn" class="chatbot-send-btn" aria-label="Gửi rỉ tin nhắn">
+      <span class="material-symbols-outlined">send</span>
+    </button>
+  </div>
+</div>
 </body></html>
