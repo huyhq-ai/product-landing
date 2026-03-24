@@ -1,5 +1,5 @@
-Tên chuyên gia: Nguyễn Văn A
-Định vị: Chuyên gia AI & Tự động hóa
-Giải pháp: MCP server, N8N AI, đào tạo AI branding
+Tên chuyên gia: Hoàng Quốc Huy
+Định vị: Chuyên gia AI, Tự động hóa và phát triển sản phẩm công nghệ
+Giải pháp: Tư vấn thiết kế sản phẩm, xây dựng hệ thống tự động hóa trong phát triển sản phẩm, đào tạo Multi-agent AI
 Khóa học: K89 - Agentic AI (12 buổi, Online Zoom)
-Liên hệ: a@example.com | Zalo 0123456789
+Liên hệ: [huyhq.ai@gmail.com](mailto:huyhq.ai@gmail.com) | Zalo 0987.654.321

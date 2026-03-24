@@ -1,9 +1,15 @@
 /* chatbot.js - AI Chatbot Logic */
+import OpenAI from "https://cdn.jsdelivr.net/npm/openai@4.86.1/+esm";
+
 document.addEventListener('DOMContentLoaded', () => {
-    // === Cấu hình OpenRouter ===
-    const API_URL = "https://openrouter.ai/api/v1/chat/completions";
-    const API_KEY = "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";
-    const MODEL = "z-ai/glm-4.5-air:free";
+    // === Cấu hình Custom OpenAI API ===
+    const openai = new OpenAI({
+      baseURL: "https://9router.vuhai.io.vn/v1",
+      apiKey: "sk-4bd27113b7dc78d1-lh6jld-f4f9c69f",
+      dangerouslyAllowBrowser: true 
+      // Cảnh báo: apiKey expose ở Frontend chỉ dùng cho môi trường test/demo hoặc website cá nhân bảo mật kém.
+    });
+    const MODEL = "ces-chatbot-gpt-5.4";
     
     // === Variables ===
     let messages = [];
@@ -26,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const resp = await fetch('chatbot_data.txt');
         if (resp.ok) {
           const text = await resp.text();
-          systemPromptBase = `Đóng vai: Trợ lý AI độc quyền của chuyên gia Nguyễn Văn A.
+          systemPromptBase = `Đóng vai: Trợ lý AI độc quyền của chuyên gia Hoàng Quốc Huy.
   
   KNOWLEDGE BASE:
   ${text}
@@ -75,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   
     function showGreeting() {
-      appendMessage('bot', "Xin chào! 👋 Tôi là trợ lý AI của Alchemist.Dev. Bạn cần tư vấn về giải pháp Hệ thống tự động hóa, thiết bị công nghệ mới hay mong muốn hợp tác phát triển sản phẩm?");
+      appendMessage('bot', "Xin chào! 👋 Tôi là trợ lý AI của anh Hoàng Quốc Huy. Bạn cần tư vấn về giải pháp Hệ thống tự động hóa, thiết bị công nghệ mới hay mong muốn hợp tác phát triển sản phẩm?");
     }
   
     // UI Event Listeners
@@ -134,27 +140,14 @@ document.addEventListener('DOMContentLoaded', () => {
       sendBtn.disabled = true;
   
       try {
-        const response = await fetch(API_URL, {
-          method: "POST",
-          headers: {
-            "Authorization": `Bearer ${API_KEY}`,
-            "HTTP-Referer": window.location.href, // Required for OpenRouter
-            "X-Title": "Alchemist.Dev Chatbot",   // App Name
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            model: MODEL,
-            messages: messages,
-            temperature: 0.7
-          })
+        // Gửi API thông qua method chính thức của OpenAI SDK
+        const response = await openai.chat.completions.create({
+          model: MODEL,
+          messages: messages,
+          temperature: 0.7
         });
   
-        if (!response.ok) {
-          throw new Error(`API Error: ${response.status}`);
-        }
-  
-        const data = await response.json();
-        const botReply = data.choices[0].message.content;
+        const botReply = response.choices[0].message.content;
   
         // Xóa typing & lưu log
         hideTyping();
@@ -162,9 +155,9 @@ document.addEventListener('DOMContentLoaded', () => {
         appendMessage('bot', botReply);
   
       } catch (error) {
-        console.error("OpenRouter API Error:", error);
+        console.error("Custom OpenAI API Error:", error);
         hideTyping();
-        appendMessage('bot', "Xin lỗi, hiện tại tôi đang gặp sự cố kết nối. Vui lòng gửi email trực tiếp qua `a@example.com` nhé!");
+        appendMessage('bot', "Xin lỗi, hiện tại tôi đang gặp sự cố kết nối. Vui lòng gửi email trực tiếp qua `huyhq.ai@example.com` nhé!");
         // Remove failing user message from history if needed
         messages.pop();
       } finally {
@@ -218,4 +211,4 @@ document.addEventListener('DOMContentLoaded', () => {
   
     // Khởi tạo
     loadKnowledgeBase();
-  });
+});
